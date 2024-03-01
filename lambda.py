@@ -77,9 +77,9 @@ def lambda_handler(event, context):
     destination = event['request']['userAttributes']['email']
     domain = destination.split("@")
  
- # If the User's domain is amazon.com the expeditor (Sender) is from gmail.com and vice versa..
+ # If the User's domain is example.com the expeditor (Sender) is from gmail.com and vice versa..
  # Tested with Sign up but it can be any of the events described here => https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-custom-email-sender.html#trigger-source 
-    if domain[1] == "amazon.com":
+    if domain[1] == "example.com":
         source = "expeditor@gmail.com"
         test_message_text = f"Your Code is {plaintext.decode()}"
  
@@ -91,7 +91,7 @@ def lambda_handler(event, context):
             test_message_text
         )
     elif domain[1] == "gmail.com":
-        source = "expeditor@amazon.com"
+        source = "expeditor@example.com"
         test_message_text = f"Your Code is {plaintext.decode()}"
  
         print(f"Sending mail from {source} to {destination}.")
